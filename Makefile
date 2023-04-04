@@ -1,8 +1,10 @@
 NAME = renderer
 
-HEADER = includes/
+HEADER = includes/main.h
 
-CFLAGS = -g
+CFLAGS = -g -Wall
+
+LFLAGS  = -L/opt/homebrew/Cellar/sdl2/2.26.4/lib -lSDL2
 
 cc = gcc
 
@@ -23,7 +25,10 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(cc) $(CFLAGS) $(INC) -c -o $@ $<
 
 $(NAME): $(OBJS)
-	$(cc) $(CFLAGS) $(INC) $^ -o $(NAME)
+	$(cc) $(CFLAGS) $(INC) $^ $(LFLAGS) -o $(NAME)
+
+run:
+	./renderer
 
 clean:
 	rm -rf $(OBJ_DIR)
