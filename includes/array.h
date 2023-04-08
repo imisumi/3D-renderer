@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mesh.h                                             :+:      :+:    :+:   */
+/*   array.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/08 16:28:32 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/04/08 14:50:22 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MESH_H
-#define MESH_H
+#ifndef ARRAY_H
+#define ARRAY_H
 
-#include "vector.h"
-#include "triangle.h"
+#define array_push(array, value)                                              \
+	do {                                                                      \
+	    (array) = array_hold((array), 1, sizeof(*(array)));                   \
+	    (array)[array_length(array) - 1] = (value);                           \
+	} while (0);
 
-#define N_CUBE_VERTICES 8
-#define N_CUBE_FACES (6 * 2) // 6 cube faces, 2 triangles per face
-
-extern t_vec3 cube_vertices[N_CUBE_VERTICES];
-extern t_face cube_faces[N_CUBE_FACES];
-
-typedef struct s_mesh
-{
-	t_vec3	*vertices;	// dynamic array of vertices
-	t_face	*faces;
-	t_vec3	rotation;
-}	t_mesh;
-
-extern t_mesh	mesh;
-
-void	load_cube_mesh_data(void);
-void	load_obj_file_data(char *filename);
+void* array_hold(void* array, int count, int item_size);
+int array_length(void* array);
+void array_free(void* array);
 
 #endif

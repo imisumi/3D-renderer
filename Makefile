@@ -18,7 +18,8 @@ SRCS =  main.c \
 		display.c \
 		vector.c \
 		mesh.c \
-		triangle.c
+		triangle.c \
+		array.c
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))
 

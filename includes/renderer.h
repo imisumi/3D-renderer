@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/07 20:26:23 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/04/08 16:38:38 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include "mesh.h"
 #include "triangle.h"
 #include "vector.h"
+#include "array.h"
+#include "get_next_line.h"
 
 
 // #define FPS 60

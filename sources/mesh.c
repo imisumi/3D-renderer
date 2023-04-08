@@ -12,7 +12,13 @@
 
 #include "../includes/renderer.h"
 
-t_vec3 mesh_vertices[N_MESH_VERTICES] = {
+t_mesh	mesh = {
+	NULL,
+	NULL,
+	{0, 0, 0}
+};
+
+t_vec3	cube_vertices[N_CUBE_VERTICES] = {
 	{-1, -1, -1}, // 1
 	{-1, 1, -1}, // 2
 	{1, 1, -1}, // 3
@@ -23,7 +29,7 @@ t_vec3 mesh_vertices[N_MESH_VERTICES] = {
 	{-1, -1, 1}  // 8
 };
 
-t_face mesh_faces[N_MESH_FACES] = {
+t_face	cube_faces[N_CUBE_FACES] = {
 	// front
 	{1, 2, 3},
 	{1, 3, 4},
@@ -43,3 +49,34 @@ t_face mesh_faces[N_MESH_FACES] = {
 	{6, 8, 1},
 	{6, 1, 4}
 };
+
+void	load_cube_mesh_data(void)
+{
+	for (int i = 0; i < N_CUBE_VERTICES; i++)
+	{
+		t_vec3	cube_vertex = cube_vertices[i];
+		array_push(mesh.vertices, cube_vertex);
+	}
+	for (int i = 0; i < N_CUBE_FACES; i++)
+	{
+		t_face	cube_face = cube_faces[i];
+		array_push(mesh.faces, cube_face);
+	}
+}
+
+void	load_obj_file_data(char *filename)
+{
+	int		i;
+	int		fd;
+	char	*line;
+
+	fd = open(filename, O_RDONLY);
+	i = 0;
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (!line || line[0] == '\0')
+			break ;
+		
+	}
+}
