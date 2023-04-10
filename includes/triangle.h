@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/07 20:51:33 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/04/10 02:36:43 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,8 @@ typedef struct s_triangle
 	t_vec2	points[3];
 }	t_triangle;
 
+void	draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color);
+void	fill_flat_bottom(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color);
+void	fill_flat_top(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color);
 
 #endif

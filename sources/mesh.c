@@ -77,6 +77,31 @@ void	load_obj_file_data(char *filename)
 		line = get_next_line(fd);
 		if (!line || line[0] == '\0')
 			break ;
-		
+		if (!strncmp(line, "v ", 2))
+		{
+			t_vec3	vertex;
+			sscanf(line, "v %f %f %f", &vertex.x, &vertex.y, &vertex.z);
+			array_push(mesh.vertices, vertex);
+			// printf("%s", line);
+		}
+		if (!strncmp(line, "f ", 2))
+		{
+			int	vertex_indices[3];
+			int	textrure_indices[3];
+			int	normal_indices[3];
+			sscanf(line, "f %d/%d/%d %d/%d/%d %d/%d/%d",
+			&vertex_indices[0], &textrure_indices[0], &normal_indices[0],
+			&vertex_indices[1], &textrure_indices[1], &normal_indices[1],
+			&vertex_indices[2], &textrure_indices[2], &normal_indices[2]
+			);
+			t_face	face = {
+				vertex_indices[0],
+				vertex_indices[1],
+				vertex_indices[2]
+			};
+			array_push(mesh.faces, face);
+			// printf("%s", line);
+		}
+		free(line);
 	}
 }

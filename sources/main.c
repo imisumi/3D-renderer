@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:08 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/08 16:30:17 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/04/09 0534:5 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // t_triangle	triangles_to_render[N_MESH_FACES];
 t_triangle	*triangles_to_render = NULL;
 
-t_vec3	camera_position = {0, 0, -5};
+t_vec3	camera_position = {0, 0, 0};
 // t_vec3	cube_rotation = {0, 0, 0};
 
 bool	is_running = false;
@@ -32,7 +32,7 @@ void	setup(void)
 	color_buffer = malloc(sizeof(uint32_t) * WIDTH * HEIGHT);
 	color_buffer_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 	
-	load_cube_mesh_data();
+	// load_cube_mesh_data();
 	load_obj_file_data("./assets/cube_tri.obj");
 }
 
@@ -75,9 +75,9 @@ void	update(void)
 	// initilize the array of triangle to render
 	triangles_to_render = NULL;
 
-	mesh.rotation.x += 0.01;
+	mesh.rotation.x += 0.007;
 	mesh.rotation.y += 0.01;
-	mesh.rotation.z += 0.01;
+	mesh.rotation.z += 0.003;
 
 	int	num_faces = array_length(mesh.faces);
 	for (int i = 0; i < num_faces; i++)
@@ -89,7 +89,7 @@ void	update(void)
 		face_vertices[1] = mesh.vertices[mesh_face.b -1];
 		face_vertices[2] = mesh.vertices[mesh_face.c -1];
 
-		t_triangle	projected_triangle;
+		t_vec3	transformed_vertices[3];
 		for (int j = 0; j < 3; j++)
 		{
 			t_vec3	transform_vertex = face_vertices[j];
@@ -98,9 +98,37 @@ void	update(void)
 			transform_vertex = vec3_rotate_y(transform_vertex, mesh.rotation.y);
 			transform_vertex = vec3_rotate_z(transform_vertex, mesh.rotation.z);
 
-			transform_vertex.z -= camera_position.z;
+			transform_vertex.z += 5;
 
-			t_vec2	projected_point = project(transform_vertex);
+			transformed_vertices[j] = transform_vertex;
+		}
+		// Check back face culling
+		t_vec3	vector_a = transformed_vertices[0]; //    A
+		t_vec3	vector_b = transformed_vertices[1]; //  / |
+		t_vec3	vector_c = transformed_vertices[2]; // B--C
+
+		// get vector substraction of B-A and C -A
+		t_vec3	vector_ab = vec3_sub(vector_b, vector_a);
+		t_vec3	vector_ac = vec3_sub(vector_c, vector_a);
+		vec3_normalize(&vector_ab);
+		vec3_normalize(&vector_ac);
+
+		// compute the face normal
+		t_vec3	normal = vec3_cross(vector_ab, vector_ac);
+		vec3_normalize(&normal);
+
+		t_vec3	camera_ray = vec3_sub(camera_position, vector_a);
+
+		float	dot_normal_camera = vec3_dot(normal, camera_ray);
+
+		if (dot_normal_camera < 0)
+			continue;
+
+
+		t_triangle	projected_triangle;
+		for (int j = 0; j < 3; j++)
+		{
+			t_vec2	projected_point = project(transformed_vertices[j]);
 
 			projected_point.x += (WIDTH / 2);
 			projected_point.y += (HEIGHT / 2);
@@ -140,24 +168,32 @@ void	render(void)
 	// 	t_vec2 projected_point = projected_points[i];
 	// 	draw_rect(projected_point.x + (WIDTH / 2), projected_point.y + (HEIGHT / 2), 2, 2, BLUE);
 	// }
+
+	// draw_triangle(100, 100, 1000, 50, 500, 700, BLUE);
+
+	// draw_filled_triangle(100, 100, 1000, 50, 500, 700, BLUE);
+
 	int	num_triangles = array_length(triangles_to_render);
 	for (int i = 0; i < num_triangles; i++)
 	{
 		t_triangle	triangle = triangles_to_render[i];
 		// draw vertex points
-		draw_rect(triangle.points[0].x, triangle.points[0].y, 2, 2, BLUE);
-		draw_rect(triangle.points[1].x, triangle.points[1].y, 2, 2, BLUE);
-		draw_rect(triangle.points[2].x, triangle.points[2].y, 2, 2, BLUE);
+		draw_rect(triangle.points[0].x, triangle.points[0].y, 1, 1, BLUE);
+		draw_rect(triangle.points[1].x, triangle.points[1].y, 1, 1, BLUE);
+		draw_rect(triangle.points[2].x, triangle.points[2].y, 1, 1, BLUE);
 
-		// draw triangle lines
-		draw_triangle(
-			triangle.points[0].x,
-			triangle.points[0].y,
-			triangle.points[1].x,
-			triangle.points[1].y,
-			triangle.points[2].x,
-			triangle.points[2].y,
+		// draw_filled_triangle lines
+		draw_filled_triangle(
+			triangle.points[0].x, triangle.points[0].y,
+			triangle.points[1].x, triangle.points[1].y,
+			triangle.points[2].x, triangle.points[2].y,
 			BLUE
+			);
+		draw_triangle(
+			triangle.points[0].x, triangle.points[0].y,
+			triangle.points[1].x, triangle.points[1].y,
+			triangle.points[2].x, triangle.points[2].y,
+			PINK
 			);
 	}
 	

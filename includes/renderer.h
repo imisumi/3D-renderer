@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/08 16:38:38 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/04/09 03:19:14 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "/opt/homebrew/Cellar/sdl2/2.26.4/include/SDL2/SDL.h"
 #include "colors.h"
 #include "display.h"
