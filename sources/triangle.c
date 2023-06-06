@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:45:50 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/10 04:44:31 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/04/10 05:06:09 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,15 @@ void	int_swap(int *a, int *b)
 // sort certices by y-coordinates ascending (y0 < y1 < y2)
 void	draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color)
 {
-	if (y0 > y1)
-	{
+	if (y0 > y1) {
 		int_swap(&y0, &y1);
 		int_swap(&x0, &x1);
 	}
-	if (y1 > y2)
-	{
+	if (y1 > y2) {
 		int_swap(&y1, &y2);
 		int_swap(&x1, &x2);
 	}
-	if (y0 > y1)
-	{
+	if (y0 > y1) {
 		int_swap(&y0, &y1);
 		int_swap(&x0, &x1);
 	}
@@ -73,7 +70,7 @@ void	draw_filled_triangle(int x0, int y0, int x1, int y1, int x2, int y2, uint32
 		fill_flat_bottom(x0, y0, x1, y1, x2, y2, color);
 	else if (y0 == y1)
 		fill_flat_top(x0, y0, x1, y1, x2, y2, color);
-	else{
+	else {
 		int	my = y1;
 		int	mx = (((float)(x2 - x0) * (y1 - y0)) / (float)(y2 - y0)) + x0;
 		// Draw flat-bottom triangle

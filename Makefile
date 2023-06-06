@@ -20,6 +20,7 @@ SRCS =  main.c \
 		mesh.c \
 		triangle.c \
 		array.c \
+		matrix.c \
 		get_next_line.c
 
 OBJS = $(addprefix $(OBJ_DIR)/,$(SRCS:.c=.o))

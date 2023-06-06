@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/09 03:19:14 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/06/04 19:18:06 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 #include "triangle.h"
 #include "vector.h"
 #include "array.h"
+#include "matrix.h"
 #include "get_next_line.h"
 
 

@@ -26,6 +26,14 @@ typedef struct s_vec3
 	float	z;
 }	t_vec3;
 
+typedef struct s_vec4
+{
+	float	x;
+	float	y;
+	float	z;
+	float	w;
+}	t_vec4;
+
 ///////////////////////////////////////
 // Vector 2D
 ///////////////////////////////////////
@@ -52,5 +60,13 @@ void	vec3_normalize(t_vec3 *v);
 t_vec3 vec3_rotate_x(t_vec3 v, float angle);
 t_vec3 vec3_rotate_y(t_vec3 v, float angle);
 t_vec3 vec3_rotate_z(t_vec3 v, float angle);
+
+///////////////////////////////////////
+// Vector 4D
+///////////////////////////////////////
+t_vec4	vec4_from_vec3(t_vec3 v);
+t_vec3	vec3_from_vec4(t_vec4 v);
+
+// t_vec4	mat4_mul_vec4_project(t_mat4 mat_prok, t_vec4 v);
 
 #endif

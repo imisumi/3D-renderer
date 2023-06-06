@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/08 04:20:12 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/06/04 16:10:02 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 
 #define FPS 60 
 #define FRAME_TARGET_TIME (1000 / FPS)
+
+enum	cull_method {
+	CULL_NONE,
+	CULL_BACKFACE
+} cull_method;
+
+enum	render_method {
+	RENDER_WIRE,
+	RENDER_WIRE_VERTEX,
+	RENDER_FILL_TRIANGLE,
+	RENDER_FILL_TRIANGLE_WIRE
+} render_method;
+
+typedef uint32_t color_t;
 
 extern SDL_Window* window;
 extern SDL_Renderer* renderer;

@@ -161,3 +161,39 @@ t_vec3 vec3_rotate_z(t_vec3 v, float angle)
 	};
 	return (rotate_vector);
 }
+
+
+
+t_vec4	vec4_from_vec3(t_vec3 v)
+{
+	t_vec4	result = {
+		v.x,
+		v.y,
+		v.z,
+		1.0f
+	};
+	return (result);
+}
+
+t_vec3	vec3_from_vec4(t_vec4 v)
+{
+	t_vec3	result = {
+		v.x,
+		v.y,
+		v.z
+	};
+	return (result);
+}
+
+
+// t_vec4	mat4_mul_vec4_project(t_mat4 mat_proj, t_vec4 v)
+// {
+// 	t_vec4 res = mat4_mul_vec4(mat_proj, v);
+// 	if (res.w != 0.0f)
+// 	{
+// 		res.x /= res.w;
+// 		res.y /= res.w;
+// 		res.z /= res.w;
+// 	}
+// 	return (res);
+// }

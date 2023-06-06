@@ -6,7 +6,7 @@
 /*   By: ichiro <ichiro@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 16:29:17 by ichiro            #+#    #+#             */
-/*   Updated: 2023/04/08 16:28:32 by ichiro           ###   ########.fr       */
+/*   Updated: 2023/06/04 21:23:31 by ichiro           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_mesh
 	t_vec3	*vertices;	// dynamic array of vertices
 	t_face	*faces;
 	t_vec3	rotation;
+	t_vec3	scale;
+	t_vec3	translation;
 }	t_mesh;
 
 extern t_mesh	mesh;
